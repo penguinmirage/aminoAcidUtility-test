@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import styled from 'styled-components';
-import { ToastContainer } from 'react-toastify';
-import ResponsiveSequenceVisualization from '../ResponsiveSequenceVisualization';
-import ColorLegend from '../ColorLegend';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import styled from "styled-components";
+import { ToastContainer } from "react-toastify";
+import ResponsiveSequenceVisualization from "../ResponsiveSequenceVisualization";
+import ColorLegend from "../ColorLegend";
+import "react-toastify/dist/ReactToastify.css";
 
 interface FormData {
   sequence1: string;
@@ -18,41 +18,17 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 32px 16px;
   min-height: 100vh;
-  
+
   @media (max-width: 768px) {
     padding: 24px 12px;
   }
-  
+
   @media (max-width: 480px) {
     padding: 16px 8px;
   }
-  
+
   @media (max-width: 320px) {
     padding: 12px 6px;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;
-  margin: 0 0 32px 0;
-  color: #1976d2;
-  line-height: 1.2;
-  
-  @media (max-width: 768px) {
-    font-size: 1.75rem;
-    margin: 0 0 24px 0;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 1.5rem;
-    margin: 0 0 20px 0;
-  }
-  
-  @media (max-width: 320px) {
-    font-size: 1.25rem;
-    margin: 0 0 16px 0;
   }
 `;
 
@@ -64,17 +40,17 @@ const FormContainer = styled.div`
   padding: 32px;
   margin-bottom: 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  
+
   @media (max-width: 768px) {
     padding: 24px;
     margin-bottom: 20px;
   }
-  
+
   @media (max-width: 480px) {
     padding: 16px;
     margin-bottom: 16px;
   }
-  
+
   @media (max-width: 320px) {
     padding: 12px;
     margin-bottom: 12px;
@@ -85,11 +61,11 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  
+
   @media (max-width: 768px) {
     gap: 20px;
   }
-  
+
   @media (max-width: 480px) {
     gap: 16px;
   }
@@ -105,54 +81,56 @@ const Label = styled.label`
   font-size: 1rem;
   font-weight: 500;
   color: #333;
-  
+
   @media (max-width: 480px) {
     font-size: 0.9rem;
   }
-  
+
   @media (max-width: 320px) {
     font-size: 0.85rem;
   }
 `;
 
 const TextArea = styled.textarea.withConfig({
-  shouldForwardProp: (prop) => prop !== 'hasError',
+  shouldForwardProp: (prop) => prop !== "hasError",
 })<{ hasError: boolean }>`
   width: 100%;
   min-height: 120px;
   padding: 12px;
-  border: 2px solid ${props => props.hasError ? '#d32f2f' : '#e0e0e0'};
+  border: 2px solid ${(props) => (props.hasError ? "#d32f2f" : "#e0e0e0")};
   border-radius: 8px;
-  font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+  font-family: "Courier New", "Monaco", "Menlo", monospace;
   font-size: 14px;
   line-height: 1.4;
   text-transform: uppercase;
   resize: vertical;
   transition: border-color 0.2s ease-in-out;
-  
+
   &:focus {
     outline: none;
-    border-color: ${props => props.hasError ? '#d32f2f' : '#1976d2'};
-    box-shadow: 0 0 0 2px ${props => props.hasError ? 'rgba(211, 47, 47, 0.2)' : 'rgba(25, 118, 210, 0.2)'};
+    border-color: ${(props) => (props.hasError ? "#d32f2f" : "#1976d2")};
+    box-shadow: 0 0 0 2px
+      ${(props) =>
+        props.hasError ? "rgba(211, 47, 47, 0.2)" : "rgba(25, 118, 210, 0.2)"};
   }
-  
+
   &::placeholder {
     color: #999;
     text-transform: none;
   }
-  
+
   @media (max-width: 768px) {
     min-height: 100px;
     padding: 10px;
     font-size: 13px;
   }
-  
+
   @media (max-width: 480px) {
     min-height: 80px;
     padding: 8px;
     font-size: 12px;
   }
-  
+
   @media (max-width: 320px) {
     min-height: 70px;
     padding: 6px;
@@ -164,11 +142,11 @@ const ErrorMessage = styled.div`
   color: #d32f2f;
   font-size: 0.875rem;
   margin-top: 4px;
-  
+
   @media (max-width: 480px) {
     font-size: 0.8rem;
   }
-  
+
   @media (max-width: 320px) {
     font-size: 0.75rem;
   }
@@ -185,35 +163,35 @@ const SubmitButton = styled.button`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   align-self: center;
-  
+
   &:hover {
     background: #1565c0;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
-  
+
   &:disabled {
     background: #ccc;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
   }
-  
+
   @media (max-width: 768px) {
     padding: 14px 28px;
     font-size: 1rem;
   }
-  
+
   @media (max-width: 480px) {
     padding: 12px 24px;
     font-size: 0.9rem;
     width: 100%;
   }
-  
+
   @media (max-width: 320px) {
     padding: 10px 20px;
     font-size: 0.85rem;
@@ -227,17 +205,17 @@ const InstructionContainer = styled.div`
   border-radius: 8px;
   padding: 16px;
   margin-top: 24px;
-  
+
   @media (max-width: 768px) {
     padding: 14px;
     margin-top: 20px;
   }
-  
+
   @media (max-width: 480px) {
     padding: 12px;
     margin-top: 16px;
   }
-  
+
   @media (max-width: 320px) {
     padding: 10px;
     margin-top: 12px;
@@ -249,12 +227,12 @@ const InstructionTitle = styled.div`
   margin-bottom: 8px;
   color: #1976d2;
   font-size: 0.9rem;
-  
+
   @media (max-width: 480px) {
     font-size: 0.85rem;
     margin-bottom: 6px;
   }
-  
+
   @media (max-width: 320px) {
     font-size: 0.8rem;
     margin-bottom: 4px;
@@ -265,16 +243,16 @@ const InstructionList = styled.div`
   font-size: 0.875rem;
   line-height: 1.6;
   color: #555;
-  
+
   div {
     margin-bottom: 4px;
   }
-  
+
   @media (max-width: 480px) {
     font-size: 0.8rem;
     line-height: 1.5;
   }
-  
+
   @media (max-width: 320px) {
     font-size: 0.75rem;
     line-height: 1.4;
@@ -291,35 +269,36 @@ const SequenceAlignment: React.FC = () => {
     formState: { errors },
     watch,
   } = useForm<FormData>({
-    mode: 'onChange',
+    mode: "onChange",
     defaultValues: {
-      sequence1: '',
-      sequence2: '',
+      sequence1: "",
+      sequence2: "",
     },
   });
 
-  const watchedSequence1 = watch('sequence1');
-  const watchedSequence2 = watch('sequence2');
+  const watchedSequence1 = watch("sequence1");
+  const watchedSequence2 = watch("sequence2");
 
   const validateSequence = (value: string) => {
     if (!value) {
-      return 'Поле обязательно для заполнения';
+      return "Поле обязательно для заполнения";
     }
-    
+
     if (!AMINO_ACIDS_PATTERN.test(value)) {
-      return 'Последовательность может содержать только латинские буквы аминокислот (A, R, N, D, C, E, Q, G, H, I, L, K, M, F, P, S, T, W, Y, V) и символ -';
+      return "Последовательность может содержать только латинские буквы аминокислот (A, R, N, D, C, E, Q, G, H, I, L, K, M, F, P, S, T, W, Y, V) и символ -";
     }
-    
+
     return true;
   };
 
   const validateLength = (value: string) => {
-    const otherSequence = value === watchedSequence1 ? watchedSequence2 : watchedSequence1;
-    
+    const otherSequence =
+      value === watchedSequence1 ? watchedSequence2 : watchedSequence1;
+
     if (otherSequence && value.length !== otherSequence.length) {
-      return 'Длина последовательностей должна быть одинаковой';
+      return "Длина последовательностей должна быть одинаковой";
     }
-    
+
     return true;
   };
 
@@ -331,10 +310,7 @@ const SequenceAlignment: React.FC = () => {
   return (
     <Container>
       <ToastContainer />
-      <Title>
-        Инструмент для визуализации выравнивания аминокислотных последовательностей
-      </Title>
-      
+
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FieldContainer>
@@ -365,7 +341,7 @@ const SequenceAlignment: React.FC = () => {
               )}
             />
           </FieldContainer>
-          
+
           <FieldContainer>
             <Label htmlFor="sequence2">
               Вторая аминокислотная последовательность
@@ -394,12 +370,10 @@ const SequenceAlignment: React.FC = () => {
               )}
             />
           </FieldContainer>
-          
-          <SubmitButton type="submit">
-            Показать выравнивание
-          </SubmitButton>
+
+          <SubmitButton type="submit">Показать выравнивание</SubmitButton>
         </Form>
-        
+
         {showVisualization && alignmentData && (
           <>
             <ColorLegend />
@@ -410,15 +384,25 @@ const SequenceAlignment: React.FC = () => {
           </>
         )}
       </FormContainer>
-      
+
       <InstructionContainer>
         <InstructionTitle>Инструкция:</InstructionTitle>
         <InstructionList>
-          <div>1. Введите две аминокислотные последовательности одинаковой длины</div>
-          <div>2. Используйте только буквы аминокислот: A, R, N, D, C, E, Q, G, H, I, L, K, M, F, P, S, T, W, Y, V и символ -</div>
+          <div>
+            1. Введите две аминокислотные последовательности одинаковой длины
+          </div>
+          <div>
+            2. Используйте только буквы аминокислот: A, R, N, D, C, E, Q, G, H,
+            I, L, K, M, F, P, S, T, W, Y, V и символ -
+          </div>
           <div>3. Нажмите "Показать выравнивание" для визуализации</div>
-          <div>4. Выделите мышкой часть последовательности для копирования в буфер обмена</div>
-          <div>5. Используйте Ctrl+F (Cmd+F) для поиска по последовательности</div>
+          <div>
+            4. Выделите мышкой часть последовательности для копирования в буфер
+            обмена
+          </div>
+          <div>
+            5. Используйте Ctrl+F (Cmd+F) для поиска по последовательности
+          </div>
         </InstructionList>
       </InstructionContainer>
     </Container>
