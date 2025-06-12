@@ -1,17 +1,17 @@
-import React from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import styled from "styled-components";
-import SequenceAlignment from "./components/SequenceAlignment";
-import "./App.css";
+import React from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import styled from 'styled-components';
+import SequenceAlignment from './components/SequenceAlignment';
+import './App.css';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1976d2",
+      main: '#1976d2',
     },
     secondary: {
-      main: "#dc004e",
+      main: '#dc004e',
     },
   },
   typography: {
@@ -21,8 +21,9 @@ const theme = createTheme({
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("https://wallpaperaccess.com/full/3312124.png");
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('https://wallpaperaccess.com/full/3312124.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -31,8 +32,9 @@ const AppContainer = styled.div`
 `;
 
 const Header = styled.header`
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("https://wallpaperaccess.com/full/3312124.png");
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('https://wallpaperaccess.com/full/3312124.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -65,24 +67,10 @@ const HeaderTitle = styled.h1`
   }
 `;
 
-const HeaderSubtitle = styled.p`
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin: 10px 0 0 0;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-  }
-`;
-
 const MainContent = styled.main`
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("https://wallpaperaccess.com/full/3312124.png");
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('https://wallpaperaccess.com/full/3312124.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -104,7 +92,7 @@ const Footer = styled.footer`
   background: rgba(0, 0, 0, 0.7);
   color: #ffffff;
   font-size: 12px;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   @media (max-width: 480px) {
@@ -113,27 +101,25 @@ const Footer = styled.footer`
   }
 `;
 
-function App(): React.JSX.Element {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppContainer>
-        <Header>
-          <HeaderTitle>BIOCAD Sequence Alignment</HeaderTitle>
-        </Header>
-        <MainContent>
-          <ContentWrapper>
-            <div className="App">
-              <SequenceAlignment />
-            </div>
-          </ContentWrapper>
-        </MainContent>
-        <Footer>
-          penguinmirage Web Development. 2025 Exclusively for BIOCAD
-        </Footer>
-      </AppContainer>
-    </ThemeProvider>
-  );
-}
+const App = (): React.JSX.Element => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <AppContainer>
+      <Header>
+        <HeaderTitle>BIOCAD Sequence Alignment</HeaderTitle>
+      </Header>
+      <MainContent>
+        <ContentWrapper>
+          <div className='App'>
+            <SequenceAlignment />
+          </div>
+        </ContentWrapper>
+      </MainContent>
+      <Footer>
+        penguinmirage Web Development. 2025 Exclusively for BIOCAD
+      </Footer>
+    </AppContainer>
+  </ThemeProvider>
+);
 
 export default App;

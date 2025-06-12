@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import styled from "styled-components";
-import { ToastContainer } from "react-toastify";
-import ResponsiveSequenceVisualization from "../ResponsiveSequenceVisualization";
-import ColorLegend from "../ColorLegend";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import styled from 'styled-components';
+import { ToastContainer } from 'react-toastify';
+import ResponsiveSequenceVisualization from '../ResponsiveSequenceVisualization';
+import ColorLegend from '../ColorLegend';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface FormData {
   sequence1: string;
@@ -92,14 +92,14 @@ const Label = styled.label`
 `;
 
 const TextArea = styled.textarea.withConfig({
-  shouldForwardProp: (prop) => prop !== "hasError",
+  shouldForwardProp: prop => prop !== 'hasError',
 })<{ hasError: boolean }>`
   width: 100%;
   min-height: 120px;
   padding: 12px;
-  border: 2px solid ${(props) => (props.hasError ? "#d32f2f" : "#e0e0e0")};
+  border: 2px solid ${props => (props.hasError ? '#d32f2f' : '#e0e0e0')};
   border-radius: 8px;
-  font-family: "Courier New", "Monaco", "Menlo", monospace;
+  font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
   font-size: 14px;
   line-height: 1.4;
   text-transform: uppercase;
@@ -108,10 +108,10 @@ const TextArea = styled.textarea.withConfig({
 
   &:focus {
     outline: none;
-    border-color: ${(props) => (props.hasError ? "#d32f2f" : "#1976d2")};
+    border-color: ${props => (props.hasError ? '#d32f2f' : '#1976d2')};
     box-shadow: 0 0 0 2px
-      ${(props) =>
-        props.hasError ? "rgba(211, 47, 47, 0.2)" : "rgba(25, 118, 210, 0.2)"};
+      ${props =>
+        props.hasError ? 'rgba(211, 47, 47, 0.2)' : 'rgba(25, 118, 210, 0.2)'};
   }
 
   &::placeholder {
@@ -269,23 +269,23 @@ const SequenceAlignment: React.FC = () => {
     formState: { errors },
     watch,
   } = useForm<FormData>({
-    mode: "onChange",
+    mode: 'onChange',
     defaultValues: {
-      sequence1: "",
-      sequence2: "",
+      sequence1: '',
+      sequence2: '',
     },
   });
 
-  const watchedSequence1 = watch("sequence1");
-  const watchedSequence2 = watch("sequence2");
+  const watchedSequence1 = watch('sequence1');
+  const watchedSequence2 = watch('sequence2');
 
   const validateSequence = (value: string) => {
     if (!value) {
-      return "Поле обязательно для заполнения";
+      return 'Поле обязательно для заполнения';
     }
 
     if (!AMINO_ACIDS_PATTERN.test(value)) {
-      return "Последовательность может содержать только латинские буквы аминокислот (A, R, N, D, C, E, Q, G, H, I, L, K, M, F, P, S, T, W, Y, V) и символ -";
+      return 'Последовательность может содержать только латинские буквы аминокислот (A, R, N, D, C, E, Q, G, H, I, L, K, M, F, P, S, T, W, Y, V) и символ -';
     }
 
     return true;
@@ -296,7 +296,7 @@ const SequenceAlignment: React.FC = () => {
       value === watchedSequence1 ? watchedSequence2 : watchedSequence1;
 
     if (otherSequence && value.length !== otherSequence.length) {
-      return "Длина последовательностей должна быть одинаковой";
+      return 'Длина последовательностей должна быть одинаковой';
     }
 
     return true;
@@ -314,11 +314,11 @@ const SequenceAlignment: React.FC = () => {
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FieldContainer>
-            <Label htmlFor="sequence1">
+            <Label htmlFor='sequence1'>
               Первая аминокислотная последовательность
             </Label>
             <Controller
-              name="sequence1"
+              name='sequence1'
               control={control}
               rules={{
                 validate: {
@@ -330,8 +330,8 @@ const SequenceAlignment: React.FC = () => {
                 <>
                   <TextArea
                     {...field}
-                    id="sequence1"
-                    placeholder="Например: VLSPADKTNIKASWEKIGSHG"
+                    id='sequence1'
+                    placeholder='Например: VLSPADKTNIKASWEKIGSHG'
                     hasError={!!errors.sequence1}
                   />
                   {errors.sequence1 && (
@@ -343,11 +343,11 @@ const SequenceAlignment: React.FC = () => {
           </FieldContainer>
 
           <FieldContainer>
-            <Label htmlFor="sequence2">
+            <Label htmlFor='sequence2'>
               Вторая аминокислотная последовательность
             </Label>
             <Controller
-              name="sequence2"
+              name='sequence2'
               control={control}
               rules={{
                 validate: {
@@ -359,8 +359,8 @@ const SequenceAlignment: React.FC = () => {
                 <>
                   <TextArea
                     {...field}
-                    id="sequence2"
-                    placeholder="Например: VLSPADKTNIKASWEKIGSHG"
+                    id='sequence2'
+                    placeholder='Например: VLSPADKTNIKASWEKIGSHG'
                     hasError={!!errors.sequence2}
                   />
                   {errors.sequence2 && (
@@ -371,7 +371,7 @@ const SequenceAlignment: React.FC = () => {
             />
           </FieldContainer>
 
-          <SubmitButton type="submit">Показать выравнивание</SubmitButton>
+          <SubmitButton type='submit'>Показать выравнивание</SubmitButton>
         </Form>
 
         {showVisualization && alignmentData && (
@@ -395,7 +395,9 @@ const SequenceAlignment: React.FC = () => {
             2. Используйте только буквы аминокислот: A, R, N, D, C, E, Q, G, H,
             I, L, K, M, F, P, S, T, W, Y, V и символ -
           </div>
-          <div>3. Нажмите "Показать выравнивание" для визуализации</div>
+          <div>
+            3. Нажмите &quot;Показать выравнивание&quot; для визуализации
+          </div>
           <div>
             4. Выделите мышкой часть последовательности для копирования в буфер
             обмена
@@ -409,4 +411,4 @@ const SequenceAlignment: React.FC = () => {
   );
 };
 
-export default SequenceAlignment;
+export { SequenceAlignment };

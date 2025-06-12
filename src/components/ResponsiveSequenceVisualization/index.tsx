@@ -1,1 +1,2 @@
-export { default } from './ResponsiveSequenceVisualization';
+export { ResponsiveSequenceVisualization } from './ResponsiveSequenceVisualization';
+export { ResponsiveSequenceVisualization as default } from './ResponsiveSequenceVisualization';
